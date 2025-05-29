@@ -1,7 +1,7 @@
 locals {
   # Environment configuration based on workspace
   env             = terraform.workspace == "default" ? "staging" : terraform.workspace
- # eks_version     = "1.32"
+  default_eks_version = "1.32"
   kubectl_version = "1.32"
   # Common configuration
   region = "ap-south-1"
@@ -33,7 +33,7 @@ locals {
   # Set default values if workspace doesn't match any environment
   env_defaults = {
     eks_name    = "geeth-eks-${local.env}"
-    eks_version = local.eks_version
+    eks_version = local.default_eks_version
     bastion_key = "geeth-k3s-${local.env}"
   }
 
@@ -47,5 +47,5 @@ locals {
   eks_name    = local.env_settings.eks_name
   bastion_key = local.env_settings.bastion_key
   vpc_cidr    = lookup(local.env_settings, "vpc_cidr", "10.0.0.0/16")
-  eks_version = lookup(local.env_settings, "eks_version", local.eks_version)
+  eks_version = local.env_settings.eks_version
 }
