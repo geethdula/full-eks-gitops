@@ -1,0 +1,22 @@
+# big-load.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: big-load
+spec:
+  replicas: 16
+  selector:
+    matchLabels:
+      app: big-load
+  template:
+    metadata:
+      labels:
+        app: big-load
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        resources:
+          requests:
+            cpu: "1000m"
+        command: [ "sh", "-c", "sleep 3600" ]
