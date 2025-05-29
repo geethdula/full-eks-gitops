@@ -25,7 +25,7 @@ resource "aws_security_group" "bastion" {
 
 # Bastion Host Instance
 resource "aws_instance" "bastion" {
-  ami                  = "ami-0afc7fe9be84307e4" # Amazon Linux 2023 AMI or use Ubuntu AMI
+  ami                  = "ami-0af9569868786b23a" # Amazon Linux 2023 AMI or use Ubuntu AMI
   instance_type        = "t3.micro"
   subnet_id            = aws_subnet.public_zone1.id
   key_name             = local.bastion_key # Replace with your key pair name

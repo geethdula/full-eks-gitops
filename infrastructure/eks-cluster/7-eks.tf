@@ -49,10 +49,17 @@ resource "aws_security_group" "eks_api" {
   egress {
     from_port   = 53
     to_port     = 53
-    protocol    = "tcp, udp"
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     description = "Allow outbound DNS"
   }
+  egress {
+  from_port   = 53
+  to_port     = 53
+  protocol    = "udp"
+  cidr_blocks = ["0.0.0.0/0"]
+  description = "Allow outbound DNS over UDP"
+}
 
   tags = {
     Name                                                   = "${local.env}-${local.eks_name}-api-sg"
