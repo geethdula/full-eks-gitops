@@ -1,4 +1,5 @@
 resource "aws_eip" "nat" {
+  count  = local.env == "dev" ? 0 : 1
   domain = "vpc"
 
   tags = {
@@ -9,7 +10,8 @@ resource "aws_eip" "nat" {
 }
 
 resource "aws_nat_gateway" "nat" {
-  allocation_id = aws_eip.nat.id
+  count         = local.env == "dev" ? 0 : 1
+  allocation_id = aws_eip.nat[0].id
   subnet_id     = aws_subnet.public_zone1.id
 
   tags = {

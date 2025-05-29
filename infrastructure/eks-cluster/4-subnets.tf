@@ -1,8 +1,8 @@
 locals {
   # Calculate subnet CIDRs based on VPC CIDR
-  vpc_cidr_prefix = split(".", local.vpc_cidr)[0]
+  vpc_cidr_prefix  = split(".", local.vpc_cidr)[0]
   vpc_second_octet = split(".", local.vpc_cidr)[1]
-  
+
   private_subnet_zone1_cidr = "${local.vpc_cidr_prefix}.${local.vpc_second_octet}.0.0/19"
   private_subnet_zone2_cidr = "${local.vpc_cidr_prefix}.${local.vpc_second_octet}.32.0/19"
   public_subnet_zone1_cidr  = "${local.vpc_cidr_prefix}.${local.vpc_second_octet}.64.0/19"

@@ -45,7 +45,11 @@ resource "aws_eks_node_group" "general" {
   }
   # release_version = nonsensitive(data.aws_ssm_parameter.eks_ami_release_version.value)
   disk_size = 50
-  subnet_ids = [
+  # Use public subnets for dev, private subnets for staging and prod
+  subnet_ids = local.env == "dev" ? [
+    aws_subnet.public_zone1.id,
+    aws_subnet.public_zone2.id
+    ] : [
     aws_subnet.private_zone1.id,
     aws_subnet.private_zone2.id
   ]

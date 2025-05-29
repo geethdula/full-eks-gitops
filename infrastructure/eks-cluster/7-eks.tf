@@ -54,12 +54,12 @@ resource "aws_security_group" "eks_api" {
     description = "Allow outbound DNS"
   }
   egress {
-  from_port   = 53
-  to_port     = 53
-  protocol    = "udp"
-  cidr_blocks = ["0.0.0.0/0"]
-  description = "Allow outbound DNS over UDP"
-}
+    from_port   = 53
+    to_port     = 53
+    protocol    = "udp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow outbound DNS over UDP"
+  }
 
   tags = {
     Name                                                   = "${local.env}-${local.eks_name}-api-sg"
@@ -97,7 +97,11 @@ resource "aws_eks_cluster" "eks" {
       aws_security_group.eks_api.id
     ]
 
-    subnet_ids = [
+    # Use public subnets for dev, private subnets for staging and prod
+    subnet_ids = local.env == "dev" ? [
+      aws_subnet.public_zone1.id,
+      aws_subnet.public_zone2.id
+      ] : [
       aws_subnet.private_zone1.id,
       aws_subnet.private_zone2.id
     ]
