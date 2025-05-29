@@ -87,8 +87,8 @@ resource "aws_eks_cluster" "eks" {
   ]
 
   vpc_config {
-    endpoint_private_access = true # Enable private access to the API server only inside the VPC
-    endpoint_public_access  = true # Enable/Disable public access
+    endpoint_private_access = local.env_settings.eks_private_access_type # Enable private access to the API server only inside the VPC
+    endpoint_public_access  = local.env_settings.eks_public_access_type # Enable/Disable public access
 
     # Restrict public access to specific CIDR blocks if needed
     # public_access_cidrs = ["YOUR_IP_ADDRESS/32"]

@@ -15,18 +15,24 @@ locals {
       eks_version = "1.31"
       bastion_key = "geeth-k3s-test"
       vpc_cidr    = "10.0.0.0/16"
+      eks_private_access_type = true
+      eks_public_access_type = true
     }
     staging = {
       eks_name    = "sandbox-geeth-eks"
       eks_version = "1.31"
       bastion_key = "geeth-k3s-test"
       vpc_cidr    = "10.1.0.0/16"
+      eks_private_access_type = true
+      eks_public_access_type = true
     }
     prod = {
       eks_name    = "sandbox-geeth-eks"
       eks_version = "1.30"
       bastion_key = "geeth-k3s-test"
       vpc_cidr    = "10.2.0.0/16"
+      eks_private_access_type = true
+      eks_public_access_type = false
     }
   }
 
