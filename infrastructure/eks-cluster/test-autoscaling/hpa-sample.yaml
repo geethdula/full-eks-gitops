@@ -1,35 +1,72 @@
+# # hpa-demo.yaml
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: php-apache
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: php-apache
+#   template:
+#     metadata:
+#       labels:
+#         app: php-apache
+#     spec:
+#       containers:
+#       - name: php-apache
+#         image: k8s.gcr.io/hpa-example
+#         ports:
+#         - containerPort: 80
+#         resources:
+#           requests:
+#             cpu: 200m
+#           limits:
+#             cpu: 500m
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: php-apache
+# spec:
+#   ports:
+#   - port: 80
+#   selector:
+#     app: php-apache
+
 # hpa-demo.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: php-apache
+  name: nginx
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: php-apache
+      app: nginx
   template:
     metadata:
       labels:
-        app: php-apache
+        app: nginx
     spec:
       containers:
-      - name: php-apache
-        image: k8s.gcr.io/hpa-example
+      - name: nginx
+        image: nginx
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
         resources:
           requests:
-            cpu: 200m
+            cpu: 50m
           limits:
-            cpu: 500m
+            cpu: 100m
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: php-apache
+  name: nginx
 spec:
   ports:
   - port: 80
   selector:
-    app: php-apache
+    app: nginx

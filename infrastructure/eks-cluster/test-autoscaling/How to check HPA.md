@@ -1,3 +1,6 @@
+kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
+
+
 > Apply hpa-sample manifest.yaml to k8s cluster
 kubectl apply -f test-hpa/hpa-sample.yaml
 

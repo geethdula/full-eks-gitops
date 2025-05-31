@@ -1,0 +1,1 @@
+https://devops-crux.com/posts/09-2023-k3d-metallb-home-lab/

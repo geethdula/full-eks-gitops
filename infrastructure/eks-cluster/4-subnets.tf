@@ -13,6 +13,8 @@ resource "aws_subnet" "private_zone1" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = local.private_subnet_zone1_cidr
   availability_zone = local.zone1
+  enable_resource_name_dns_a_record_on_launch = true
+  
 
   tags = {
     "Name"                                                 = "${local.env}-private-${local.zone1}"
