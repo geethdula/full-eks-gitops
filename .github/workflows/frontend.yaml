@@ -92,7 +92,7 @@ jobs:
        
       - name: Update Kubernetes Deployment
         run: |
-          sed -i "s|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}|" kubernetes/frontend/deploy.yaml
+          sed -i "s|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/gitops-eks-frontend:${{ github.sha }}|" kubernetes/frontend/deploy.yaml
           cat kubernetes/frontend/deploy.yaml
 
       - name: Commit and push updated Kubernetes manifest
