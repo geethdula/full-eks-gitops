@@ -28,15 +28,15 @@ spec:
         app.kubernetes.io/component: frontend
         app.kubernetes.io/name: opentelemetry-demo-frontend
     spec:
+      imagePullSecrets:
+              - name: my-dockerhub-secret
       serviceAccountName: opentelemetry-demo
       containers:
         - name: frontend
           image: hellomf981013/frontend:580766cf7e6e9f3b1bdf6de78e567112286896a8
           imagePullPolicy: IfNotPresent
-          imagePullSecrets:
-              - name: my-dockerhub-secret
+          
           ports:
-            
             - containerPort: 8080
               name: service
           env:
