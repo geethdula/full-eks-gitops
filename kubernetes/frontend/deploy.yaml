@@ -13,7 +13,7 @@ metadata:
     app.kubernetes.io/version: "1.12.0"
     app.kubernetes.io/part-of: opentelemetry-demo
 spec:
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -31,7 +31,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: frontend
-          image: neamulkabiremon/frontend:22a06baa481caf2898d78bfe983f724bbb46f59f
+          image: hellomf981013/gitops-eks-frontend:22a06baa481caf2898d78bfe983f724bbb46f59f
           imagePullPolicy: IfNotPresent
           ports:
             
