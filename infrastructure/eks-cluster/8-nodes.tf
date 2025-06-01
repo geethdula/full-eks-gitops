@@ -58,13 +58,14 @@ resource "aws_eks_node_group" "general" {
     source_security_group_ids = [aws_security_group.node_ssh_access.id]
   }
 
-  capacity_type  = "SPOT"
-  instance_types = ["t3a.medium"]
+  capacity_type  = "ON_DEMAND"
+  #instance_types = ["t3a.medium", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge"]
+  instance_types = ["t3.large", "t3.xlarge", "t3.2xlarge"]
 
   scaling_config {
     desired_size = 2
     max_size     = 8
-    min_size     = 2
+    min_size     = 0
   }
 
   update_config {
