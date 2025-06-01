@@ -28,17 +28,17 @@ spec:
         app.kubernetes.io/component: adservice
         app.kubernetes.io/name: opentelemetry-demo-adservice
     spec:
-      topologySpreadConstraints:
-      - maxSkew: 1              # Maximum difference in number of pods between nodes
-        topologyKey: kubernetes.io/hostname  # Spread across nodes
-        whenUnsatisfiable: ScheduleAnyway   # Still schedule if constraint can't be met perfectly
-        labelSelector:
-          matchLabels:
-            opentelemetry.io/name: opentelemetry-demo-adservice
+      # topologySpreadConstraints:
+      # - maxSkew: 1              # Maximum difference in number of pods between nodes
+      #   topologyKey: kubernetes.io/hostname  # Spread across nodes
+      #   whenUnsatisfiable: ScheduleAnyway   # Still schedule if constraint can't be met perfectly
+      #   labelSelector:
+      #     matchLabels:
+      #       opentelemetry.io/name: opentelemetry-demo-adservice
       serviceAccountName: opentelemetry-demo
       containers:
         - name: adservice
-          image: neamulkabiremon/checkout:963d0f438b40369fa5a21e9f0bac9581b85171bc
+          image: neamulkabiremon/checkout:db50ed904d477b9c723af619a4ac35c6e9c57c48
           imagePullPolicy: IfNotPresent
           ports:
             

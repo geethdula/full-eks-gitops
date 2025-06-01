@@ -11,7 +11,7 @@ const Banner = () => {
         <S.BannerImg />
       </S.ImageContainer>
       <S.TextContainer>
-        <S.Title>The best telescopes to see the world closer. Deployement 1</S.Title>
+        <S.Title>The best telescopes to see the world closer. Deployement 2</S.Title>
         <Link href="#hot-products"><S.GoShoppingButton>Go Shopping</S.GoShoppingButton></Link>
       </S.TextContainer>
     </S.Banner>
