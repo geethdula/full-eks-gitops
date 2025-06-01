@@ -60,6 +60,13 @@ resource "aws_security_group" "eks_api" {
     cidr_blocks = ["0.0.0.0/0"]
     description = "Allow outbound DNS over UDP"
   }
+  egress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow outbound HTTP"
+  }
 
   tags = {
     Name                                                   = "${local.env}-${local.eks_name}-api-sg"
@@ -102,8 +109,8 @@ resource "aws_eks_cluster" "eks" {
       aws_subnet.public_zone1.id,
       aws_subnet.public_zone2.id
       ] : [
-      aws_subnet.private_zone1.id,
-      aws_subnet.private_zone2.id
+      aws_subnet.private_zone1[0].id,
+      aws_subnet.private_zone2[0].id
     ]
   }
 

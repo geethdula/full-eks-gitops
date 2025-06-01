@@ -10,6 +10,7 @@ locals {
 }
 
 resource "aws_subnet" "private_zone1" {
+  count  = local.env == "dev" ? 0 : 1
   vpc_id            = aws_vpc.main.id
   cidr_block        = local.private_subnet_zone1_cidr
   availability_zone = local.zone1
@@ -26,6 +27,7 @@ resource "aws_subnet" "private_zone1" {
 }
 
 resource "aws_subnet" "private_zone2" {
+  count  = local.env == "dev" ? 0 : 1
   vpc_id            = aws_vpc.main.id
   cidr_block        = local.private_subnet_zone2_cidr
   availability_zone = local.zone2
