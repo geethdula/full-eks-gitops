@@ -41,7 +41,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: frontend
-          image: hellomf981013/gitops-eks-frontend:c1a04d08b25f40fc59b2da4257a730af6ea30e36
+          image: hellomf981013/gitops-eks-frontend:5ea306bc95e36521872d8986785911263e1e0aae
           imagePullPolicy: IfNotPresent
           
           ports:
