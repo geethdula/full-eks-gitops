@@ -9,6 +9,7 @@ locals {
   public_subnet_zone2_cidr  = "${local.vpc_cidr_prefix}.${local.vpc_second_octet}.96.0/19"
 }
 
+
 resource "aws_subnet" "private_zone1" {
   count  = local.env == "dev" ? 0 : 1
   vpc_id            = aws_vpc.main.id
@@ -19,6 +20,7 @@ resource "aws_subnet" "private_zone1" {
 
   tags = {
     "Name"                                                 = "${local.env}-private-${local.zone1}"
+    "karpenter.sh/discovery"                               = "${local.env}-${local.eks_name}"
     "kubernetes.io/role/internal-elb"                      = "1"
     "kubernetes.io/cluster/${local.env}-${local.eks_name}" = "owned"
     Terraform                                              = "true"
@@ -34,6 +36,7 @@ resource "aws_subnet" "private_zone2" {
 
   tags = {
     "Name"                                                 = "${local.env}-private-${local.zone2}"
+    "karpenter.sh/discovery"                               = "${local.env}-${local.eks_name}"
     "kubernetes.io/role/internal-elb"                      = "1"
     "kubernetes.io/cluster/${local.env}-${local.eks_name}" = "owned"
     Terraform                                              = "true"
@@ -49,6 +52,7 @@ resource "aws_subnet" "public_zone1" {
 
   tags = {
     "Name"                                                 = "${local.env}-public-${local.zone1}"
+    "karpenter.sh/discovery"                               = "${local.env}-${local.eks_name}"
     "kubernetes.io/role/elb"                               = "1"
     "kubernetes.io/cluster/${local.env}-${local.eks_name}" = "owned"
     Terraform                                              = "true"
@@ -64,6 +68,7 @@ resource "aws_subnet" "public_zone2" {
 
   tags = {
     "Name"                                                 = "${local.env}-public-${local.zone2}"
+    "karpenter.sh/discovery"                               = "${local.env}-${local.eks_name}"
     "kubernetes.io/role/elb"                               = "1"
     "kubernetes.io/cluster/${local.env}-${local.eks_name}" = "owned"
     Terraform                                              = "true"

@@ -13,7 +13,7 @@ metadata:
     app.kubernetes.io/version: "1.12.0"
     app.kubernetes.io/part-of: opentelemetry-demo
 spec:
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -28,6 +28,13 @@ spec:
         app.kubernetes.io/component: imageprovider
         app.kubernetes.io/name: opentelemetry-demo-imageprovider
     spec:
+      topologySpreadConstraints:
+      - maxSkew: 1              # Maximum difference in number of pods between nodes
+        topologyKey: kubernetes.io/hostname  # Spread across nodes
+        whenUnsatisfiable: ScheduleAnyway   # Still schedule if constraint can't be met perfectly
+        labelSelector:
+          matchLabels:
+            opentelemetry.io/name: opentelemetry-demo-imageprovider
       serviceAccountName: opentelemetry-demo
       containers:
         - name: imageprovider

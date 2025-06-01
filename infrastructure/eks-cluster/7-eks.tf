@@ -70,6 +70,7 @@ resource "aws_security_group" "eks_api" {
 
   tags = {
     Name                                                   = "${local.env}-${local.eks_name}-api-sg"
+   # "karpenter.sh/discovery"                               = "${local.env}-${local.eks_name}"
     Terraform                                              = "true"
     Environment                                            = local.env
     "kubernetes.io/cluster/${local.env}-${local.eks_name}" = "owned"

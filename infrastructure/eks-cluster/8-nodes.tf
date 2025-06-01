@@ -112,6 +112,7 @@ resource "aws_security_group" "node_ssh_access" {
 
   tags = {
     Name        = "${local.env}-${local.eks_name}-node-ssh-sg"
+    "karpenter.sh/discovery"                               = "${local.env}-${local.eks_name}"
     Terraform   = "true"
     Environment = local.env
   }
